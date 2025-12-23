@@ -1,0 +1,14 @@
+.DS_Store
+
+__pycache__/
+*.pyc
+.venv/
+.python-version
+.ipynb_checkpoints/
+
+data/
+models/
+outputs/
+
+.env
+EOF
