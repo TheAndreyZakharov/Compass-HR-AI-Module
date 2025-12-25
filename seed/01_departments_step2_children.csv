@@ -1,0 +1,9 @@
+Department,Company,Is Group,Parent Department
+Backend,My Company,0,Engineering - MC
+Frontend,My Company,0,Engineering - MC
+iOS,My Company,0,Engineering - MC
+DevOps,My Company,0,Engineering - MC
+Security,My Company,0,Engineering - MC
+Finance,My Company,0,Operations - MC
+Legal,My Company,0,Operations - MC
+Office & IT,My Company,0,Operations - MC

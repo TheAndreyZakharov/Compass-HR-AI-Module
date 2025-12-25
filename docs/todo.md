@@ -68,40 +68,81 @@
 ---
 
 ## 4) Портал: ERPNext + Frappe HRMS в Docker (локально)
-> Цель: получить работающий портал в браузере (localhost), чтобы сразу создавать HR-сущности и UI.
 
 - [x] Создана папка portal
 - [x] Скачан frappe_docker - склонирован репозиторий
 - [x] Запуск
 - [x] Тест портала
 - [x] Созданы скрипты
+- [x] Доустановлен hrm + корректная переустановка остального
+- [x] Корректировка скриптов
+- [x] Первичная настройка портала
+- [x] Salary Component - basic 
+- [x] Salary Structure - RUB Monthly (Base)
+- [x] Payroll Period - Period (Base)
+<details>
+  <summary>Про csv</summary>
+  01_departments.csv
+  Document Type: Department
+  Import Type: Insert New Records
+  Загружаешь файл → импорт
 
+  02_designations.csv
+  Document Type: Designation
+  Import Type: Insert New Records
 
-### 4.5. Первичная настройка портала
-- [ ] Зайти в ERPNext/HRMS и проверить:
-  - [ ] Employees/Сотрудники доступны
-  - [ ] Departments/Отделы доступны
-  - [ ] Roles/Permissions работают (создаются роли, назначаются пользователям)
-- [ ] Создать тестовую структуру компании:
-  - [ ] 3–5 отделов (Development, QA, Product, Data, HR)
-  - [ ] 10–20 сотрудников с ролями/грейдами/стеком (пока вручную)
+  03_employee_grades.csv
+  Document Type: Employee Grade
+  Import Type: Insert New Records
+
+  04_employment_types.csv
+  Document Type: Employment Type
+  Import Type: Insert New Records
+
+  05_employees.csv
+  Document Type: Employee
+  Import Type: Insert New Records
+
+  06_salary_structure_assignments.csv
+  Document Type: Salary Structure Assignment
+  Import Type: Insert New Records
+
+</details>
+
+- [x] Создана тестовая структура компании
+- [x] hrms и frappe docker в сабмодулях
+
 
 ---
 
 ## 5) Кастомизация портала под COMPASS-HR (DocTypes + UI + права)
 > На этом этапе создаются сущности, в которые ML-сервис будет писать результаты.
 
+> ⚠️ Для реализации модом надо в этом пункте сделать:
+> - отказ от “ручного кликанья” DocTypes в UI как основного способа; DocTypes должны создаваться из кода Frappe app
+> - весь UI (страницы, кнопки, workspace) — в своём приложении (Frappe app), чтобы установка была одной командой install-app
+> - все сущности модуля должны быть изолированы (свои DocTypes/права), чтобы не ломать и не менять стандартные HRMS/ERPNext данные
+
 ### 5.1. Создание собственного приложения (custom app) внутри Frappe
 - [ ] Создать папку для кастомного приложения в репозитории:
-  ```bash
-  cd /Users/andrey/Documents/projects/Compass-HR-AI-Module
-  mkdir -p portal/custom_app
-  ```
+  <details>
+    <summary>Команды</summary>
+
+    cd /Users/andrey/Documents/projects/Compass-HR-AI-Module
+    mkdir -p portal/custom_app
+
+  </details>
 - [ ] Принцип: custom app должен храниться в репозитории и устанавливаться в контейнер (подход зависит от dev-режима Frappe; в дальнейшем выбрать один способ):
   - вариант A: монтирование каталога app внутрь контейнера (удобно для разработки),
   - вариант B: разработка через Dev Containers/внутри контейнера и commit в repo.
 
 > TODO: после того как портал стабильно запустится, выбрать конкретный способ разработки кастомного app (с монтированием кода наружу).
+
+> ⚠️ Для реализации модом надо в этом пункте сделать:
+> - создать реальный Frappe app (например `compass_hr_ai`) и держать его исходники в репозитории
+> - монтировать этот app в контейнер (bind mount), как уже сделано для hrms, чтобы код был “снаружи”
+> - обеспечить установку/обновление: bench --site <site> install-app compass_hr_ai (и migrate)
+> - запретить изменения стандартных DocTypes; только добавлять свои DocTypes и read-only интеграцию (кнопки/вьюхи) в Employee
 
 ### 5.2. Создание DocTypes (минимальный боевой набор)
 - [ ] Создать DocTypes (через UI Frappe или через код app):
@@ -113,6 +154,8 @@
   - [ ] `LearningRecommendation`
   - [ ] `TeamPlan`
   - [ ] `Resume` (attachments + метаданные)
+  - [ ] \CompassEmploymentHistory` (история ролей/переводов внутри компании)`
+
 
 - [ ] Сразу определить поля и связи:
   - [ ] `Skill`: name, category, aliases, source, embedding_id
@@ -123,6 +166,37 @@
   - [ ] `LearningRecommendation`: employee, target_role, gap(child: skill, delta), courses(child: course_id, score, why_json, link)
   - [ ] `TeamPlan`: department_name, target_roles(child: role_profile, count, priority, deadline), results (internal/upskill/external + ссылки на рекомендации)
   - [ ] `Resume`: employee, file, extracted_text, extracted_skills(child), parsed_at
+  - [ ] \CompassEmploymentHistory`: employee, company, from_date, to_date, department, designation, grade, change_type, comment`
+
+> ⚠️ Для реализации модом надо в этом пункте сделать:  
+> -	завести отдельный DocType CompassEmploymentHistory (история ролей внутри компании), чтобы не использовать стандартные HRMS Promotion/Transfer как хранилище  
+> -	хранить карьерный путь как набор “шагов” (from/to + dept + designation + grade), где текущая позиция — это запись с пустым to_date  
+> -	подготовить demo seed seed/07_compass_employment_history.csv и импортировать его после установки кастомного app и миграций DocTypes (чтобы не переносить данные потом)
+
+> ⚠️ Для реализации модом надо в этом пункте сделать:
+> - все DocTypes должны создаваться в коде Frappe app (через fixtures/migrations), а не только в UI
+
+> ⚠️ Важно про способ хранения/доставки схемы:
+> - DocTypes/Pages/Workspace должны жить в репозитории приложения (как часть Frappe app)
+> - изменения схемы проводить через `bench migrate` + patches (и версии приложения)
+> - fixtures использовать только для “UI-настроек” (Custom Field / Property Setter / Workspace и т.п.), а не как основной механизм эволюции DocTypes
+
+> - имена/нейминг: либо префикс “Compass” в UI-именах, либо аккуратные internal names, чтобы не конфликтовать с ERPNext/HRMS
+> - любые записи/изменения должны идти только в эти DocTypes; HRMS/ERPNext сущности не мутировать
+> - предусмотреть версии схемы: миграции/patches при обновлении модуля
+> - предусмотреть “удаляемость”: если модуль удалить, основные данные HRMS должны остаться без изменений
+
+> ⚠️ Для реализации “изоляции и вакуума” надо в этом пункте сделать:
+> - в модуле работать с “снимками” данных сотрудников (read-only копии) в своих DocTypes, чтобы не менять реальные карточки
+> - обновление снимков по расписанию (например nightly) и по кнопке “Refresh”
+> - явно разделить: “источник” (HRMS Employee и связанные сущности) и “снимок для ML” (свои DocTypes)
+> - хранить результаты ML отдельно (в CareerPrediction/LearningRecommendation/TeamPlan), не писать обратно в HRMS поля
+
+> ⚠️ Если хочется проще (без “снимков”) — допускается режим “read-only”:
+> - модуль читает HRMS Employee и связанные сущности ТОЛЬКО на чтение (без копирования)
+> - результаты ML всё равно пишет только в DocTypes модуля
+> - “снимки” включать позже, когда понадобится воспроизводимость/аудит/обезличивание/ускорение пересчётов
+
 
 ### 5.3. Роли и права доступа
 - [ ] Настроить роли:
@@ -130,6 +204,11 @@
   - [ ] Manager — доступ к TeamPlan и сотрудникам своего отдела
   - [ ] Employee — доступ к собственным рекомендациям (read-only)
 - [ ] Проверить, что Employee не видит чужие рекомендации.
+
+> ⚠️ Для реализации модом надо в этом пункте сделать:
+> - создать отдельные роли модуля (например `Compass HR Admin`, `Compass Manager`, `Compass Employee`)
+> - права на DocTypes модуля: строгие (Employee видит только свои рекомендации, Manager — только свой департамент/подчинённых)
+> - не выдавать новые права на стандартные HRMS DocTypes; модуль не должен расширять доступ к HR данным
 
 ### 5.4. UI-элементы (кнопки и формы)
 - [ ] В карточке сотрудника добавить кнопки:
@@ -140,59 +219,86 @@
 
 > На этом этапе кнопки пока могут вызывать “заглушки” (или логировать событие), но интерфейс должен быть готов.
 
+> ⚠️ Для реализации модом надо в этом пункте сделать:
+> - UI реализовать в своём Frappe app: workspace/страницы/doctype views, а не через “ручные” правки
+> - кнопки должны вызывать whitelisted server methods (из app), а те уже дергают ML-service
+> - добавить отдельный раздел/меню “COMPASS-HR” (workspace), чтобы модуль был “как отдельная вкладка”
+> - добавить режим “demo”: кнопки работают даже без реальных данных (на синтетике/seed), но этот seed — опционален
+
 ---
 
 ## 6) ML-часть: структура папок и единое окружение Python (поэтапно)
+
+> ⚠️ Для реализации модом надо в этом пункте сделать:
+> - ML должен быть упакован как сервис (FastAPI) с предсказуемым запуском (docker compose или python run)
+> - веса/индексы/эмбеддинги не хранить в git; доставлять через “model pack” (архив) или release assets
+> - предусмотреть два режима: demo (маленькие артефакты) и full (большие артефакты)
+
 ### 6.1. Создание папки `ml/` и виртуального окружения
 - [ ] Создать папку ML:
-  ```bash
-  cd /Users/andrey/Documents/projects/Compass-HR-AI-Module
-  mkdir -p ml
-  ```
+  <details>
+    <summary>Команды</summary>
+
+    cd /Users/andrey/Documents/projects/Compass-HR-AI-Module
+    mkdir -p ml
+
+  </details>
 - [ ] Создать единственное окружение для проекта:
-  ```bash
-  cd ml
-  python3 -m venv .venv
-  source .venv/bin/activate
-  python -V
-  pip -V
-  ```
+  <details>
+    <summary>Команды</summary>
+
+    cd ml
+    python3 -m venv .venv
+    source .venv/bin/activate
+    python -V
+    pip -V
+
+  </details>
 - [ ] Обновить pip/setuptools/wheel:
-  ```bash
-  pip install -U pip setuptools wheel
-  ```
+  <details>
+    <summary>Команды</summary>
+
+    pip install -U pip setuptools wheel
+
+  </details>
 
 ### 6.2. Базовые зависимости (фиксировать постепенно)
 - [ ] Создать `ml/requirements.txt` (первый набор — ETL + ноутбуки + базовые утилиты):
-  ```bash
-  cat > requirements.txt << 'EOF'
-  numpy
-  pandas
-  pyarrow
-  scikit-learn
-  tqdm
-  matplotlib
+  <details>
+    <summary>Команды</summary>
 
-  jupyter
-  ipykernel
+    cat > requirements.txt << 'EOF'
+    numpy
+    pandas
+    pyarrow
+    scikit-learn
+    tqdm
+    matplotlib
 
-  requests
-  httpx
-  python-dotenv
-  pydantic
+    jupyter
+    ipykernel
 
-  ruff
-  black
-  mypy
-  pytest
-  pre-commit
-  EOF
-  ```
+    requests
+    httpx
+    python-dotenv
+    pydantic
+
+    ruff
+    black
+    mypy
+    pytest
+    pre-commit
+    EOF
+
+  </details>
 - [ ] Установить:
-  ```bash
-  pip install -r requirements.txt
-  python -m ipykernel install --user --name compass-hr --display-name "Python (compass-hr)"
-  ```
+  <details>
+    <summary>Команды</summary>
+
+    pip install -r requirements.txt
+    python -m ipykernel install --user --name compass-hr --display-name "Python (compass-hr)"
+
+  </details>
 
 ### 6.3. Настройка VS Code под окружение
 - [ ] В VS Code выбрать интерпретатор: `ml/.venv/bin/python`
@@ -201,52 +307,82 @@
 ---
 
 ## 7) Данные: структура и скачивание источников (по мере надобности)
+
+> ⚠️ Для реализации модом надо в этом пункте сделать:
+> - данные пользователя не тащить в репозиторий; модуль должен работать на их данных (через чтение HRMS)
+> - демо-данные держать отдельно и опционально (seed), чтобы “просто потыкаться” было легко
+> - кэш внешних API (hh/stepik) хранить локально (disk/volume), никогда не коммитить
+
 ### 7.1. Создание структуры `data/` (только когда реально начинается работа с данными)
 - [ ] Создать (в корне репозитория):
-  ```bash
-  cd /Users/andrey/Documents/projects/Compass-HR-AI-Module
-  mkdir -p data/raw data/interim data/processed data/cache
-  ```
+  <details>
+    <summary>Команды</summary>
+
+    cd /Users/andrey/Documents/projects/Compass-HR-AI-Module
+    mkdir -p data/raw data/interim data/processed data/cache
+
+  </details>
 - [ ] Добавить `data/` в `.gitignore` уже сделано (не коммитить большие данные).
 
 ### 7.2. Карьерные траектории РФ (Zenodo)
 - [ ] Скачать датасет вручную (из браузера) и положить в `data/raw/rostrud/`:
-  ```bash
-  mkdir -p data/raw/rostrud
-  ```
+  <details>
+    <summary>Команды</summary>
+
+    mkdir -p data/raw/rostrud
+
+  </details>
   - Страница набора: https://zenodo.org/records/12727876
   - Скачать нужные архивы (например workexp / edu / codebook) и поместить туда.
 
 - [ ] Распаковать (пример):
-  ```bash
-  cd data/raw/rostrud
-  # пример: unzip dataset1.workexp.csv.zip
-  unzip -n "*.zip"
-  ```
+  <details>
+    <summary>Команды</summary>
+
+    cd data/raw/rostrud
+    # пример: unzip dataset1.workexp.csv.zip
+    unzip -n "*.zip"
+
+  </details>
 
 ### 7.3. hh.ru API (вакансии/зарплаты)
 - [ ] Создать папку кэша:
-  ```bash
-  mkdir -p data/cache/hh
-  ```
+  <details>
+    <summary>Команды</summary>
+
+    mkdir -p data/cache/hh
+
+  </details>
 - [ ] Принцип: все ответы API сохраняются на диск, повторные запросы — только при явной команде “refresh”.
 
 ### 7.4. Stepik API (курсы)
 - [ ] Создать папку кэша:
-  ```bash
-  mkdir -p data/cache/stepik
-  ```
+  <details>
+    <summary>Команды</summary>
+
+    mkdir -p data/cache/stepik
+
+  </details>
 
 ---
 
 ## 8) ETL-пайплайны (скрипты) — создание папок и файлов строго по этапу
+
+> ⚠️ Для реализации модом надо в этом пункте сделать:
+> - ETL должен быть воспроизводимым (одна команда → один результат), чтобы можно было собрать демо-артефакты
+> - результаты ETL для демо не хранить в git; публиковать как “demo data pack” отдельно (архив/release) или генерировать локально
+> - предусмотреть режим “demo small”: маленький срез данных для быстрого старта у пользователей
+
 ### 8.1. Создать каркас ETL
 - [ ] Создать папки:
-  ```bash
-  cd /Users/andrey/Documents/projects/Compass-HR-AI-Module/ml
-  mkdir -p src/compass_hr_ai/{etl,schemas,utils} notebooks
-  touch src/compass_hr_ai/__init__.py
-  ```
+  <details>
+    <summary>Команды</summary>
+
+    cd /Users/andrey/Documents/projects/Compass-HR-AI-Module/ml
+    mkdir -p src/compass_hr_ai/{etl,schemas,utils} notebooks
+    touch src/compass_hr_ai/__init__.py
+
+  </details>
 
 ### 8.2. ETL: карьерные траектории (role normalization + sequences)
 - [ ] Создать файл:
@@ -280,45 +416,63 @@
 ---
 
 ## 9) NLP слой: эмбеддинги + извлечение навыков (сразу “нормальная версия”)
+
+> ⚠️ Для реализации модом надо в этом пункте сделать:
+> - модель эмбеддингов и все индексы должны подниматься одинаково (фикс версии, фикс конфиги)
+> - хранение эмбеддингов: отдельный vector store (например Qdrant) в Docker для демо
+> - снапшоты/дампы индекса — опциональные артефакты (demo pack), не хранить в git
+
 ### 9.1. Добавить зависимости (когда начинается NLP)
 - [ ] В `ml/requirements.txt` добавить и установить:
-  ```txt
-  torch
-  transformers
-  sentence-transformers
-  spacy
-  natasha
-  yake
-  rapidfuzz
-  ```
+  <details>
+    <summary>Зависимости</summary>
+
+    torch
+    transformers
+    sentence-transformers
+    spacy
+    natasha
+    yake
+    rapidfuzz
+
+  </details>
 - [ ] Установить:
-  ```bash
-  cd ml
-  source .venv/bin/activate
-  pip install -r requirements.txt
-  ```
+  <details>
+    <summary>Команды</summary>
+
+    cd ml
+    source .venv/bin/activate
+    pip install -r requirements.txt
+
+  </details>
 
 ### 9.2. Векторное хранилище (рекомендуется)
 Вариант A (проще локально): Qdrant в Docker.
 - [ ] Создать папку и compose:
-  ```bash
-  cd /Users/andrey/Documents/projects/Compass-HR-AI-Module
-  mkdir -p infra/qdrant
-  cat > infra/qdrant/docker-compose.yml << 'EOF'
-  services:
-    qdrant:
-      image: qdrant/qdrant:latest
-      ports:
-        - "6333:6333"
-      volumes:
-        - ./storage:/qdrant/storage
-  EOF
-  ```
+  <details>
+    <summary>Команды</summary>
+
+    cd /Users/andrey/Documents/projects/Compass-HR-AI-Module
+    mkdir -p infra/qdrant
+    cat > infra/qdrant/docker-compose.yml << 'EOF'
+    services:
+      qdrant:
+        image: qdrant/qdrant:latest
+        ports:
+          - "6333:6333"
+        volumes:
+          - ./storage:/qdrant/storage
+    EOF
+
+  </details>
 - [ ] Запустить:
-  ```bash
-  cd infra/qdrant
-  docker compose up -d
-  ```
+  <details>
+    <summary>Команды</summary>
+
+    cd infra/qdrant
+    docker compose up -d
+
+  </details>
 
 ### 9.3. Эмбеддинги текстов (вакансии/курсы/резюме)
 - [ ] Создать модуль:
@@ -349,18 +503,30 @@
 ---
 
 ## 10) Модель карьерных траекторий (sequence model)
+
+> ⚠️ Для реализации модом надо в этом пункте сделать:
+> - обученные веса и маппинги ролей хранить как “model pack” (архив) отдельно от git
+> - обеспечить “demo weights” маленького размера, чтобы пользователь мог быстро запустить и увидеть результат
+> - обеспечить совместимость версий: весам соответствует конкретная версия кода и схемы features
+
 ### 10.1. Добавить зависимости (когда начинается обучение)
 - [ ] В `ml/requirements.txt` добавить:
-  ```txt
-  pytorch-lightning
-  torchmetrics
-  ```
+  <details>
+    <summary>Зависимости</summary>
+
+    pytorch-lightning
+    torchmetrics
+
+  </details>
 - [ ] Установить:
-  ```bash
-  cd ml
-  source .venv/bin/activate
-  pip install -r requirements.txt
-  ```
+  <details>
+    <summary>Команды</summary>
+
+    cd ml
+    source .venv/bin/activate
+    pip install -r requirements.txt
+
+  </details>
 
 ### 10.2. Подготовка датасета под sequence model
 - [ ] Создать модуль:
@@ -392,17 +558,28 @@
 ---
 
 ## 11) Модель зарплаты / стоимости найма (CatBoost)
+
+> ⚠️ Для реализации модом надо в этом пункте сделать:
+> - внешние запросы (hh) должны быть кэшируемыми и управляемыми (чтобы пользователь не словил лимиты)
+> - для демо допустим “замороженный” датасет вакансий (demo pack), чтобы без API ключей/лимитов работало
+
 ### 11.1. Зависимости
 - [ ] Добавить:
-  ```txt
-  catboost
-  ```
+  <details>
+    <summary>Зависимости</summary>
+
+    catboost
+
+  </details>
 - [ ] Установить:
-  ```bash
-  cd ml
-  source .venv/bin/activate
-  pip install -r requirements.txt
-  ```
+  <details>
+    <summary>Команды</summary>
+
+    cd ml
+    source .venv/bin/activate
+    pip install -r requirements.txt
+
+  </details>
 
 ### 11.2. Датасет зарплат
 - [ ] Создать:
@@ -426,6 +603,12 @@
 ---
 
 ## 12) Рекомендательная логика: сотрудник → роль → курсы
+
+> ⚠️ Для реализации модом надо в этом пункте сделать:
+> - все рекомендации должны быть объяснимыми (почему этот курс/роль)
+> - результаты сохранять в DocTypes модуля, чтобы можно было смотреть историю и откатываться
+> - учитывать “изоляцию”: профиль сотрудника для ML берётся из снимка/копии, а не правит HRMS данные
+
 ### 12.1. Skill-gap
 - [ ] Реализовать модуль:
   - `ml/src/compass_hr_ai/reco/skill_gap.py`
@@ -448,6 +631,12 @@
 ---
 
 ## 13) Планирование нового отдела (TeamPlan): внутренние / upskill / внешний найм
+
+> ⚠️ Для реализации модом надо в этом пункте сделать:
+> - TeamPlan должен работать как отдельный “песочничный” объект внутри модуля (не создавать реальные Department/Employee изменения)
+> - результаты TeamPlan сохранять отдельно (в DocTypes модуля), чтобы модуль был “надстройкой”, а не “редактором базы”
+> - предусмотреть демо-режим: если внутренних данных мало, уметь работать на демо seed
+
 ### 13.1. Логика TeamPlan
 - [ ] Реализовать:
   - `ml/src/compass_hr_ai/team/team_planner.py`
@@ -469,22 +658,38 @@
 ---
 
 ## 14) FastAPI ML-service (инференс + интеграция)
+
+> ⚠️ Для реализации модом надо в этом пункте сделать:
+> - ML-service должен иметь docker-режим (для демо “в один клик”) и python-режим (для разработки)
+> - фиксировать контракт API (версии) и валидировать схемы вход/выход (pydantic)
+> - добавить конфиг “где лежат модели” и “где лежат индексы” (через env)
+> - добавить скрипт скачивания model pack (если модели не в репо)
+
 ### 14.1. Создать папку сервиса и файлы
 - [ ] Создать:
-  ```bash
-  cd /Users/andrey/Documents/projects/Compass-HR-AI-Module/ml
-  mkdir -p service
-  touch service/main.py
-  ```
+  <details>
+    <summary>Команды</summary>
+
+    cd /Users/andrey/Documents/projects/Compass-HR-AI-Module/ml
+    mkdir -p service
+    touch service/main.py
+
+  </details>
 - [ ] Добавить зависимости:
-  ```txt
-  fastapi
-  uvicorn[standard]
-  ```
+  <details>
+    <summary>Зависимости</summary>
+
+    fastapi
+    uvicorn[standard]
+
+  </details>
 - [ ] Установить:
-  ```bash
-  pip install -r requirements.txt
-  ```
+  <details>
+    <summary>Команды</summary>
+
+    pip install -r requirements.txt
+
+  </details>
 
 ### 14.2. Реализовать эндпоинты
 - [ ] `GET /health`
@@ -496,25 +701,47 @@
 
 ### 14.3. Запуск сервиса локально
 - [ ] Запуск:
-  ```bash
-  cd ml
-  source .venv/bin/activate
-  uvicorn service.main:app --host 0.0.0.0 --port 9000 --reload
-  ```
+  <details>
+    <summary>Команды</summary>
+
+    cd ml
+    source .venv/bin/activate
+    uvicorn service.main:app --host 0.0.0.0 --port 9000 --reload
+
+  </details>
 - [ ] Проверка:
-  ```bash
-  curl http://localhost:9000/health
-  ```
+  <details>
+    <summary>Команды</summary>
+
+    curl http://localhost:9000/health
+
+  </details>
 
 ---
 
 ## 15) Интеграция портала (Frappe) с ML-service
+
+> ⚠️ Для реализации модом надо в этом пункте сделать:
+> - интеграцию реализовать внутри Frappe app (server methods + UI), чтобы установка была “как мод”
+> - хранить результаты инференса в DocTypes модуля и показывать их в отдельном workspace “COMPASS-HR”
+> - обеспечить два режима установки:
+>   - режим A: установка app в существующий ERPNext/HRMS (без демо-данных)
+>   - режим B: demo stack (docker compose), чтобы “просто потыкаться”
+
 ### 15.1. Конфиг адресов и секретов
 - [ ] В корне репозитория создать `.env` (не коммитить):
-  ```env
-  ML_SERVICE_URL=http://host.docker.internal:9000
-  ```
+  <details>
+    <summary>Пример</summary>
+
+    ML_SERVICE_URL=http://host.docker.internal:9000
+
+  </details>
   > В Docker на macOS `host.docker.internal` обычно указывает на хост-машину.
+
+> ⚠️ Для реализации модом надо в этом пункте сделать:
+> - для demo stack использовать сетевое имя сервиса внутри docker network (например `http://ml:9000`)
+> - для режима установки в чужую систему оставить возможность `host.docker.internal` или внешний URL
+> - хранить конфиги в env, не в коде
 
 ### 15.2. Вызовы из Frappe по кнопке
 - [ ] Реализовать серверные методы (Frappe whitelisted methods):
@@ -528,27 +755,47 @@
   - TeamPlan (результаты)
   - EmployeeSkillProfile
 
+> ⚠️ Для реализации “изоляции и вакуума” надо в этом пункте сделать:
+> - server methods должны брать входные данные из снимков (read-only копий) и/или из HRMS только на чтение
+> - любые “обновления” должны быть обновлениями снимков и результатов модуля, а не изменениями HRMS карточек
+
 ### 15.3. Фоновые задачи (scheduler)
 - [ ] Добавить jobs:
   - nightly: обновить каталог курсов,
   - nightly: обновить рынок (hh) по ключевым ролям,
   - weekly: переиндексация эмбеддингов (если нужно).
 
+> ⚠️ Для реализации “изоляции и вакуума” надо в этом пункте сделать:
+> - nightly job: обновлять снимки сотрудников (копии профилей) и пересчитывать рекомендации без изменения HRMS
+> - добавить ручные кнопки “Refresh snapshot / Recompute” для контроля
+> - хранить историю пересчётов (timestamped results) в DocTypes модуля
+
 ---
 
 ## 16) Резюме (локальные файлы): извлечение текста и навыков
+
+> ⚠️ Для реализации модом надо в этом пункте сделать:
+> - загрузки резюме хранить как attachments и метаданные в DocTypes модуля
+> - не менять HRMS записи, только обогащать профиль модуля (EmployeeSkillProfile / snapshots)
+
 ### 16.1. Зависимости для парсинга
 - [ ] Добавить:
-  ```txt
-  pypdf
-  python-docx
-  ```
+  <details>
+    <summary>Зависимости</summary>
+
+    pypdf
+    python-docx
+
+  </details>
 - [ ] Установить:
-  ```bash
-  cd ml
-  source .venv/bin/activate
-  pip install -r requirements.txt
-  ```
+  <details>
+    <summary>Команды</summary>
+
+    cd ml
+    source .venv/bin/activate
+    pip install -r requirements.txt
+
+  </details>
 
 ### 16.2. Пайплайн резюме
 - [ ] Реализовать:
@@ -563,12 +810,21 @@
 ---
 
 ## 17) Тестирование и контроль качества
+
+> ⚠️ Для реализации модом надо в этом пункте сделать:
+> - добавить “smoke demo”: один скрипт поднимает demo stack и проверяет ключевые URL/эндпоинты
+> - тестировать миграции DocTypes модуля (установка/обновление/удаление)
+> - тестировать режим A (установка в существующий сайт) отдельно от режима B (demo stack)
+
 ### 17.1. Unit tests (ML)
 - [ ] Создать:
-  ```bash
-  cd ml
-  mkdir -p tests
-  ```
+  <details>
+    <summary>Команды</summary>
+
+    cd ml
+    mkdir -p tests
+
+  </details>
 - [ ] Покрыть тестами:
   - нормализацию должностей,
   - разбор зарплат hh,
@@ -591,6 +847,12 @@
 ---
 
 ## 18) Документация (минимум для готового продукта)
+
+> ⚠️ Для реализации модом надо в этом пункте сделать:
+> - описать два режима установки: A (install app) и B (demo stack)
+> - описать что модуль не изменяет HRMS/ERPNext данные (работает поверх/через копии)
+> - описать где взять model pack и как его положить в нужную папку
+
 - [ ] `docs/architecture.md`:
   - компоненты, потоки данных, форматы идентификаторов
 - [ ] `docs/api_contract.md`:
@@ -601,6 +863,10 @@
   - описание моделей, метрики, ограничения, риски bias
 - [ ] `docs/demo_scenarios.md`:
   - пошагово как воспроизвести 3 ключевых кейса
+
+> ⚠️ Для реализации “демо без данных в репо” надо в этом пункте сделать:
+> - описать опциональный seed: как загрузить демо-данные (и как их удалить)
+> - описать что большие датасеты и кэши не входят в репо и должны скачиваться/генерироваться локально
 
 ---
 
@@ -616,6 +882,59 @@
 - [ ] Интеграция по кнопкам в портале работает.
 - [ ] 3 демо-сценария воспроизводимы.
 - [ ] Документация заполнена.
+
+> ⚠️ Для реализации модом надо в этом пункте сделать:
+> - подтвердить два режима:
+>   - режим A: модуль устанавливается в существующий ERPNext/HRMS сайт одной командой install-app и работает на их данных
+>   - режим B: demo stack поднимается одной командой (scripts/compose) и позволяет “потыкаться”
+> - подтвердить, что удаление модуля не ломает основной портал и не удаляет HRMS данные
+
+---
+
+## 20) Упаковка “как мод” и релиз (обязательный финальный этап)
+
+> ⚠️ Для реализации модом надо в этом пункте сделать:
+> - сделать единый механизм версионирования: версия модуля + версия model pack + совместимость
+> - вынести большие артефакты (модели/индексы/демо-данные) из git и публиковать отдельно (архив/release assets)
+> - добавить скрипты “скачать и развернуть демо-артефакты”
+
+### 20.1. Два режима установки (A / B)
+- [ ] Режим A: установка модуля в существующий ERPNext/HRMS (без демо-данных)
+  - [ ] описать шаги: поставить Frappe app, выполнить install-app, migrate, настроить ML_SERVICE_URL
+- [ ] Режим B: демо-режим (docker stack) “в один клик”
+  - [ ] поднятие портала + ml + (qdrant)
+  - [ ] опционально: загрузить демо-данные и демо model pack
+
+### 20.2. Скрипты релиза
+- [ ] Добавить скрипты:
+  - [ ] scripts/demo_up.sh (поднять демо стек)
+  - [ ] scripts/demo_seed.sh (опционально загрузить демо данные)
+  - [ ] scripts/ml_download_models.sh (скачать model pack)
+  - [ ] scripts/smoke_test.sh (проверить, что demo stack работает)
+
+### 20.3. Безопасность данных и ограничения
+- [ ] Зафиксировать правило:
+  - [ ] модуль не изменяет HRMS/ERPNext данные, работает через read-only чтение и свои DocTypes/снимки
+  - [ ] любые изменения делаются только в DocTypes модуля
+- [ ] Добавить предупреждения:
+  - [ ] не запускать destructive команды (например удаление volume) без осознания последствий
+  - [ ] демо-данные опциональны и не входят в репозиторий
+
+---
+
+## 21) README (финал, писать в самом конце)
+
+> ⚠️ Для реализации модом надо в этом пункте сделать:
+> - README должен описывать два пути:
+>   - “Install as app” (для тех у кого уже есть ERPNext/HRMS)
+>   - “Demo in one click” (для тех кто хочет потыкаться)
+> - README должен объяснять:
+>   - какие данные модуль читает из HRMS (только чтение)
+>   - какие данные модуль хранит у себя (DocTypes модуля, снимки, результаты ML)
+>   - где взять model pack и как его подключить
+>   - как включить/выключить демо-данные
+>   - как запустить ML-service (docker/python)
+>   - как устроены версии и совместимость (код/модели/индексы)
 
 ---
 

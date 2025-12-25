@@ -1,0 +1,81 @@
+Employee Number,First Name,Last Name,Full Name,Company,Department,Designation,Grade,Employment Type,Status,Date of Birth,Date of Joining,Gender,Personal Email
+MC-0001,Игорь,Руденко,Игорь Руденко,My Company,Management - MC,CEO,C-Level,Full-time,Active,12-05-1972,01-03-2023,Male,igor.rudenko@mycompany.local
+MC-0002,Андрей,Волков,Андрей Волков,My Company,Management - MC,CTO,C-Level,Full-time,Active,03-11-1976,01-03-2023,Male,andrey.volkov@mycompany.local
+MC-0003,Виктория,Петрова,Виктория Петрова,My Company,Product - MC,CPO,C-Level,Full-time,Active,19-02-1980,01-04-2023,Female,victoria.petrova@mycompany.local
+MC-0004,Дмитрий,Лебедев,Дмитрий Лебедев,My Company,Operations - MC,COO,C-Level,Full-time,Active,27-07-1975,01-04-2023,Male,dmitry.lebedev@mycompany.local
+MC-0005,Елена,Орлова,Елена Орлова,My Company,Finance - MC,CFO,C-Level,Full-time,Active,08-09-1978,01-04-2023,Female,elena.orlova@mycompany.local
+MC-0006,Ольга,Соколова,Ольга Соколова,My Company,HR - MC,HR Director,Head,Full-time,Active,14-01-1982,01-05-2023,Female,olga.sokolova@mycompany.local
+MC-0007,Марина,Беляева,Марина Беляева,My Company,HR - MC,HR Business Partner,Senior,Full-time,Active,16-04-1987,01-06-2023,Female,marina.belyaeva@mycompany.local
+MC-0008,Алина,Круглова,Алина Круглова,My Company,HR - MC,Recruiter,Middle,Full-time,Active,05-06-1992,01-02-2024,Female,alina.kruglova@mycompany.local
+MC-0009,Сергей,Пахомов,Сергей Пахомов,My Company,HR - MC,People Operations Specialist,Middle,Full-time,Active,30-03-1991,01-03-2024,Male,sergey.pakhomov@mycompany.local
+MC-0010,Елена,Киселёва,Елена Киселёва,My Company,HR - MC,Payroll Specialist,Middle,Full-time,Active,11-12-1989,15-03-2024,Female,elena.kiseleva@mycompany.local
+MC-0011,Максим,Князев,Максим Князев,My Company,Engineering - MC,Engineering Manager,Lead,Full-time,Active,07-08-1986,01-07-2023,Male,maksim.knyazev@mycompany.local
+MC-0012,Сергей,Иванов,Сергей Иванов,My Company,Backend - MC,Backend Engineer,Lead,Full-time,Active,18-09-1987,15-07-2023,Male,sergey.ivanov@mycompany.local
+MC-0013,Илья,Смирнов,Илья Смирнов,My Company,Backend - MC,Backend Engineer,Senior,Full-time,Active,25-01-1989,01-09-2023,Male,ilya.smirnov@mycompany.local
+MC-0014,Георгий,Фомин,Георгий Фомин,My Company,Backend - MC,Backend Engineer,Senior,Full-time,Active,09-04-1988,01-10-2023,Male,georgy.fomin@mycompany.local
+MC-0015,Антон,Макаров,Антон Макаров,My Company,Backend - MC,Backend Engineer,Senior,Full-time,Active,02-12-1988,15-10-2023,Male,anton.makarov@mycompany.local
+MC-0016,Владимир,Игнатьев,Владимир Игнатьев,My Company,Backend - MC,Backend Engineer,Senior,Full-time,Active,20-06-1987,10-01-2024,Male,vladimir.ignatyev@mycompany.local
+MC-0017,Павел,Чернов,Павел Чернов,My Company,Backend - MC,Backend Engineer,Middle,Full-time,Active,15-10-1992,10-02-2024,Male,pavel.chernov@mycompany.local
+MC-0018,Роман,Куликов,Роман Куликов,My Company,Backend - MC,Backend Engineer,Middle,Full-time,Active,28-02-1993,20-02-2024,Male,roman.kulikov@mycompany.local
+MC-0019,Даниил,Титов,Даниил Титов,My Company,Backend - MC,Backend Engineer,Middle,Full-time,Active,06-07-1994,01-03-2024,Male,daniil.titov@mycompany.local
+MC-0020,Егор,Фролов,Егор Фролов,My Company,Backend - MC,Backend Engineer,Middle,Full-time,Active,17-09-1992,10-03-2024,Male,egor.frolov@mycompany.local
+MC-0021,Алексей,Никитин,Алексей Никитин,My Company,Backend - MC,Backend Engineer,Junior,Full-time,Active,04-05-1998,01-05-2024,Male,alexey.nikitin@mycompany.local
+MC-0022,Степан,Кравцов,Степан Кравцов,My Company,Backend - MC,Backend Engineer,Junior,Full-time,Active,13-01-1999,01-06-2024,Male,stepan.kravtsov@mycompany.local
+MC-0023,Тимофей,Назаров,Тимофей Назаров,My Company,Backend - MC,Backend Engineer,Junior,Full-time,Active,29-08-2000,15-06-2024,Male,timofey.nazarov@mycompany.local
+MC-0024,Мария,Кузнецова,Мария Кузнецова,My Company,Frontend - MC,Frontend Engineer,Lead,Full-time,Active,21-03-1987,01-08-2023,Female,maria.kuznetsova@mycompany.local
+MC-0025,Софья,Власова,Софья Власова,My Company,Frontend - MC,Frontend Engineer,Senior,Full-time,Active,12-11-1989,01-10-2023,Female,sofia.vlasova@mycompany.local
+MC-0026,Евгения,Котова,Евгения Котова,My Company,Frontend - MC,Frontend Engineer,Senior,Full-time,Active,04-02-1990,01-11-2023,Female,evgenia.kotova@mycompany.local
+MC-0027,Виталий,Миронов,Виталий Миронов,My Company,Frontend - MC,Frontend Engineer,Senior,Full-time,Active,23-05-1988,15-01-2024,Male,vitaly.mironov@mycompany.local
+MC-0028,Алина,Фёдорова,Алина Фёдорова,My Company,Frontend - MC,Frontend Engineer,Middle,Full-time,Active,16-07-1993,01-02-2024,Female,alina.fedorova@mycompany.local
+MC-0029,Екатерина,Павлова,Екатерина Павлова,My Company,Frontend - MC,Frontend Engineer,Middle,Full-time,Active,10-10-1992,15-02-2024,Female,ekaterina.pavlova@mycompany.local
+MC-0030,Андрей,Платонов,Андрей Платонов,My Company,Frontend - MC,Frontend Engineer,Middle,Full-time,Active,01-12-1994,01-03-2024,Male,andrey.platonov@mycompany.local
+MC-0031,Ирина,Сергеева,Ирина Сергеева,My Company,Frontend - MC,Frontend Engineer,Middle,Full-time,Active,26-06-1993,15-03-2024,Female,irina.sergeeva@mycompany.local
+MC-0032,Денис,Егоров,Денис Егоров,My Company,Frontend - MC,Frontend Engineer,Junior,Full-time,Active,07-09-1999,01-05-2024,Male,denis.egorov@mycompany.local
+MC-0033,Ксения,Морозова,Ксения Морозова,My Company,Frontend - MC,Frontend Engineer,Junior,Full-time,Active,18-04-2000,15-05-2024,Female,ksenia.morozova@mycompany.local
+MC-0034,Сергей,Логинов,Сергей Логинов,My Company,iOS - MC,iOS Engineer,Senior,Full-time,Active,14-12-1988,01-09-2023,Male,sergey.loginov@mycompany.local
+MC-0035,Марат,Юсупов,Марат Юсупов,My Company,iOS - MC,iOS Engineer,Senior,Full-time,Active,09-01-1989,15-10-2023,Male,marat.yusupov@mycompany.local
+MC-0036,Дарья,Белова,Дарья Белова,My Company,iOS - MC,iOS Engineer,Middle,Full-time,Active,30-09-1994,10-01-2024,Female,darya.belova@mycompany.local
+MC-0037,Александр,Гаврилов,Александр Гаврилов,My Company,iOS - MC,iOS Engineer,Middle,Full-time,Active,05-05-1993,10-02-2024,Male,alexander.gavrilov@mycompany.local
+MC-0038,Елизавета,Савина,Елизавета Савина,My Company,iOS - MC,iOS Engineer,Middle,Full-time,Active,17-02-1995,01-03-2024,Female,elizaveta.savina@mycompany.local
+MC-0039,Надежда,Колесникова,Надежда Колесникова,My Company,iOS - MC,iOS Engineer,Junior,Full-time,Active,11-11-2000,01-06-2024,Female,nadezhda.kolesnikova@mycompany.local
+MC-0040,Кирилл,Сафонов,Кирилл Сафонов,My Company,DevOps - MC,DevOps / SRE Engineer,Lead,Full-time,Active,08-08-1986,15-08-2023,Male,kirill.safonov@mycompany.local
+MC-0041,Илья,Баранов,Илья Баранов,My Company,DevOps - MC,DevOps / SRE Engineer,Senior,Full-time,Active,19-03-1988,01-11-2023,Male,ilya.baranov@mycompany.local
+MC-0042,Фёдор,Гущин,Фёдор Гущин,My Company,DevOps - MC,DevOps / SRE Engineer,Middle,Full-time,Active,27-10-1992,01-02-2024,Male,fedor.gushchin@mycompany.local
+MC-0043,Станислав,Комаров,Станислав Комаров,My Company,DevOps - MC,DevOps / SRE Engineer,Middle,Full-time,Active,02-04-1993,01-03-2024,Male,stanislav.komarov@mycompany.local
+MC-0044,Кирилл,Демин,Кирилл Демин,My Company,DevOps - MC,DevOps / SRE Engineer,Junior,Full-time,Active,15-07-1999,15-06-2024,Male,kirill.demin@mycompany.local
+MC-0045,Наталья,Громова,Наталья Громова,My Company,Security - MC,Security Engineer,Lead,Full-time,Active,06-06-1987,15-09-2023,Female,natalia.gromova@mycompany.local
+MC-0046,Павел,Новиков,Павел Новиков,My Company,QA - MC,QA Engineer,Lead,Full-time,Active,09-09-1986,01-10-2023,Male,pavel.novikov@mycompany.local
+MC-0047,Ксения,Федотова,Ксения Федотова,My Company,QA - MC,QA Engineer,Senior,Full-time,Active,14-04-1989,01-11-2023,Female,ksenia.fedotova@mycompany.local
+MC-0048,Владислав,Романов,Владислав Романов,My Company,QA - MC,QA Engineer,Middle,Full-time,Active,21-01-1993,15-01-2024,Male,vladislav.romanov@mycompany.local
+MC-0049,Татьяна,Гурова,Татьяна Гурова,My Company,QA - MC,QA Engineer,Middle,Full-time,Active,03-03-1992,01-02-2024,Female,tatyana.gurova@mycompany.local
+MC-0050,Иван,Михайлов,Иван Михайлов,My Company,QA - MC,QA Engineer,Junior,Full-time,Active,12-12-1999,01-05-2024,Male,ivan.mikhailov@mycompany.local
+MC-0051,Николай,Буров,Николай Буров,My Company,QA - MC,QA Automation Engineer,Senior,Full-time,Active,25-05-1989,01-12-2023,Male,nikolay.burov@mycompany.local
+MC-0052,Анастасия,Левина,Анастасия Левина,My Company,QA - MC,QA Automation Engineer,Middle,Full-time,Active,07-07-1993,15-02-2024,Female,anastasia.levina@mycompany.local
+MC-0053,Дмитрий,Нестеров,Дмитрий Нестеров,My Company,QA - MC,QA Automation Engineer,Middle,Full-time,Active,28-08-1992,01-03-2024,Male,dmitry.nesterov@mycompany.local
+MC-0054,Артём,Шевцов,Артём Шевцов,My Company,QA - MC,Release Engineer,Middle,Full-time,Active,04-01-1994,20-03-2024,Male,artem.shevtsov@mycompany.local
+MC-0055,Алексей,Романов,Алексей Романов,My Company,Product - MC,Product Manager,Senior,Full-time,Active,16-10-1988,01-08-2023,Male,alexey.romanov@mycompany.local
+MC-0056,Светлана,Шарыпова,Светлана Шарыпова,My Company,Product - MC,Product Manager,Senior,Full-time,Active,02-02-1989,01-10-2023,Female,svetlana.sharypova@mycompany.local
+MC-0057,Пётр,Осипов,Пётр Осипов,My Company,Product - MC,Product Manager,Senior,Full-time,Active,30-06-1987,01-11-2023,Male,petr.osipov@mycompany.local
+MC-0058,Роман,Захаров,Роман Захаров,My Company,Product - MC,UX Researcher,Middle,Full-time,Active,11-09-1992,01-02-2024,Male,roman.zakharov@mycompany.local
+MC-0059,Юлия,Маслова,Юлия Маслова,My Company,Product - MC,Product Designer,Senior,Full-time,Active,22-12-1989,01-12-2023,Female,yulia.maslova@mycompany.local
+MC-0060,Анна,Тихонова,Анна Тихонова,My Company,Product - MC,Product Designer,Middle,Full-time,Active,05-05-1994,15-02-2024,Female,anna.tikhonova@mycompany.local
+MC-0061,Кристина,Данилова,Кристина Данилова,My Company,Product - MC,Content Designer,Middle,Full-time,Active,13-03-1993,10-03-2024,Female,kristina.danilova@mycompany.local
+MC-0062,Наталья,Елисеева,Наталья Елисеева,My Company,Product - MC,Technical Writer,Middle,Full-time,Active,27-07-1992,15-03-2024,Female,natalia.eliseeva@mycompany.local
+MC-0063,Анна,Климова,Анна Климова,My Company,Data - MC,Data Scientist,Middle,Full-time,Active,09-10-1993,10-01-2024,Female,anna.klimova@mycompany.local
+MC-0064,Денис,Лаптев,Денис Лаптев,My Company,Data - MC,Data Analyst,Senior,Full-time,Active,18-01-1989,15-11-2023,Male,denis.laptev@mycompany.local
+MC-0065,Владимир,Степанов,Владимир Степанов,My Company,Data - MC,Data Engineer,Senior,Full-time,Active,07-04-1987,15-10-2023,Male,vladimir.stepanov@mycompany.local
+MC-0066,Павел,Емельянов,Павел Емельянов,My Company,Data - MC,Data Engineer,Middle,Full-time,Active,23-11-1992,01-02-2024,Male,pavel.emelyanov@mycompany.local
+MC-0067,Екатерина,Синицына,Екатерина Синицына,My Company,Data - MC,ML Engineer,Middle,Full-time,Active,01-06-1993,15-02-2024,Female,ekaterina.sinitsyna@mycompany.local
+MC-0068,Кирилл,Фадеев,Кирилл Фадеев,My Company,Data - MC,MLOps Engineer,Senior,Full-time,Active,29-09-1988,20-01-2024,Male,kirill.fadeev@mycompany.local
+MC-0069,Дмитрий,Сорокин,Дмитрий Сорокин,My Company,Sales - MC,Head of Sales,Head,Full-time,Active,04-04-1983,01-09-2023,Male,dmitry.sorokin@mycompany.local
+MC-0070,Евгений,Карпов,Евгений Карпов,My Company,Sales - MC,Account Executive,Senior,Full-time,Active,15-12-1989,15-01-2024,Male,evgeny.karpov@mycompany.local
+MC-0071,Полина,Грачева,Полина Грачева,My Company,Sales - MC,Sales Development Representative,Middle,Full-time,Active,20-02-1995,01-03-2024,Female,polina.gracheva@mycompany.local
+MC-0072,Камиль,Абдуллин,Камиль Абдуллин,My Company,Sales - MC,Partnerships Manager,Senior,Full-time,Active,10-08-1988,01-02-2024,Male,kamil.abdullin@mycompany.local
+MC-0073,Наталья,Черкасова,Наталья Черкасова,My Company,Support - MC,Support Lead,Middle,Full-time,Active,06-01-1992,10-01-2024,Female,natalia.cherkasova@mycompany.local
+MC-0074,Игорь,Лисицын,Игорь Лисицын,My Company,Support - MC,Support Specialist,Junior,Full-time,Active,19-09-2000,01-05-2024,Male,igor.lisitsyn@mycompany.local
+MC-0075,Оксана,Яковлева,Оксана Яковлева,My Company,Support - MC,Support Specialist,Junior,Full-time,Active,28-05-2001,15-05-2024,Female,oksana.yakovleva@mycompany.local
+MC-0076,Валентин,Прохоров,Валентин Прохоров,My Company,Support - MC,Support Specialist,Junior,Full-time,Active,03-03-2000,01-06-2024,Male,valentin.prokhorov@mycompany.local
+MC-0077,Татьяна,Зорина,Татьяна Зорина,My Company,Finance - MC,Accountant,Middle,Full-time,Active,17-07-1993,01-02-2024,Female,tatyana.zorina@mycompany.local
+MC-0078,Александр,Сергеев,Александр Сергеев,My Company,Legal - MC,Legal Counsel,Senior,Full-time,Active,24-10-1987,20-01-2024,Male,alexander.sergeev@mycompany.local
+MC-0079,Ксения,Никулина,Ксения Никулина,My Company,Office & IT - MC,Office Manager,Middle,Full-time,Active,08-12-1992,10-02-2024,Female,ksenia.nikulina@mycompany.local
+MC-0080,Илья,Гончаров,Илья Гончаров,My Company,Office & IT - MC,IT Administrator,Middle,Full-time,Active,14-02-1991,01-03-2024,Male,ilya.goncharov@mycompany.local

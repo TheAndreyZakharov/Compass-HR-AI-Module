@@ -1,3 +1,6 @@
 [submodule "portal/frappe_docker"]
 	path = portal/frappe_docker
 	url = https://github.com/frappe/frappe_docker
+[submodule "portal/hrms"]
+	path = portal/hrms
+	url = https://github.com/frappe/hrms

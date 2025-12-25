@@ -1,0 +1,18 @@
+Department,Company,Is Group,Parent Department
+Management,My Company,1,
+Engineering,My Company,1,
+Backend,My Company,0,Engineering
+Frontend,My Company,0,Engineering
+iOS,My Company,0,Engineering
+DevOps,My Company,0,Engineering
+Security,My Company,0,Engineering
+QA,My Company,0,
+Product,My Company,0,
+Data,My Company,0,
+HR,My Company,0,
+Sales,My Company,0,
+Support,My Company,0,
+Operations,My Company,1,
+Finance,My Company,0,Operations
+Legal,My Company,0,Operations
+Office & IT,My Company,0,Operations

@@ -1,0 +1,128 @@
+Employee,Company,From Date,To Date,Department,Designation,Grade,Change Type,Comment
+MC-0001,My Company,01-03-2023,,Management - MC,CEO,C-Level,Hiring,Hired into executive role
+MC-0002,My Company,01-03-2023,,Management - MC,CTO,C-Level,Hiring,Hired into executive role
+MC-0003,My Company,01-04-2023,,Product - MC,CPO,C-Level,Hiring,Hired into executive role
+MC-0004,My Company,01-04-2023,,Operations - MC,COO,C-Level,Hiring,Hired into executive role
+MC-0005,My Company,01-04-2023,,Finance - MC,CFO,C-Level,Hiring,Hired into executive role
+MC-0006,My Company,01-05-2023,31-01-2024,HR - MC,HR Business Partner,Senior,Hiring,Joined company; initial position before head role
+MC-0006,My Company,01-02-2024,,HR - MC,HR Director,Head,Promotion,Promoted to head role
+MC-0007,My Company,01-06-2023,31-12-2023,HR - MC,HR Business Partner,Middle,Hiring,Joined as Middle; ramp-up period
+MC-0007,My Company,01-01-2024,,HR - MC,HR Business Partner,Senior,Promotion,Promoted to Senior
+MC-0008,My Company,01-02-2024,,HR - MC,Recruiter,Middle,Hiring,Hired as Middle
+MC-0009,My Company,01-03-2024,,HR - MC,People Operations Specialist,Middle,Hiring,Hired as Middle
+MC-0010,My Company,15-03-2024,,HR - MC,Payroll Specialist,Middle,Hiring,Hired as Middle
+MC-0011,My Company,01-07-2023,28-02-2024,Backend - MC,Backend Engineer,Senior,Hiring,Joined as Senior Backend Engineer
+MC-0011,My Company,29-02-2024,,Engineering - MC,Engineering Manager,Lead,Promotion,Promoted to Engineering Manager (scope expanded)
+MC-0012,My Company,15-07-2023,14-03-2024,Backend - MC,Backend Engineer,Senior,Hiring,Joined as Senior; performance track to lead
+MC-0012,My Company,15-03-2024,,Backend - MC,Backend Engineer,Lead,Promotion,Promoted to Lead
+MC-0013,My Company,01-09-2023,31-03-2024,Backend - MC,Backend Engineer,Middle,Hiring,Joined as Middle; ramp-up period
+MC-0013,My Company,01-04-2024,,Backend - MC,Backend Engineer,Senior,Promotion,Promoted to Senior
+MC-0014,My Company,01-10-2023,30-04-2024,Backend - MC,Backend Engineer,Middle,Hiring,Joined as Middle; ramp-up period
+MC-0014,My Company,01-05-2024,,Backend - MC,Backend Engineer,Senior,Promotion,Promoted to Senior
+MC-0015,My Company,15-10-2023,14-05-2024,Backend - MC,Backend Engineer,Middle,Hiring,Joined as Middle; ramp-up period
+MC-0015,My Company,15-05-2024,,Backend - MC,Backend Engineer,Senior,Promotion,Promoted to Senior
+MC-0016,My Company,10-01-2024,,Backend - MC,Backend Engineer,Senior,Hiring,Hired directly as Senior
+MC-0017,My Company,10-02-2024,09-08-2024,Backend - MC,Backend Engineer,Junior,Hiring,Joined as Junior; probation + first projects
+MC-0017,My Company,10-08-2024,,Backend - MC,Backend Engineer,Middle,Promotion,Promoted to Middle
+MC-0018,My Company,20-02-2024,19-08-2024,Backend - MC,Backend Engineer,Junior,Hiring,Joined as Junior; probation + first projects
+MC-0018,My Company,20-08-2024,,Backend - MC,Backend Engineer,Middle,Promotion,Promoted to Middle
+MC-0019,My Company,01-03-2024,31-08-2024,Backend - MC,Backend Engineer,Junior,Hiring,Joined as Junior; probation + first projects
+MC-0019,My Company,01-09-2024,,Backend - MC,Backend Engineer,Middle,Promotion,Promoted to Middle
+MC-0020,My Company,10-03-2024,09-09-2024,Backend - MC,Backend Engineer,Junior,Hiring,Joined as Junior; probation + first projects
+MC-0020,My Company,10-09-2024,,Backend - MC,Backend Engineer,Middle,Promotion,Promoted to Middle
+MC-0021,My Company,01-05-2024,,Backend - MC,Backend Engineer,Junior,Hiring,Hired as Junior (entry level)
+MC-0022,My Company,01-06-2024,,Backend - MC,Backend Engineer,Junior,Hiring,Hired as Junior (entry level)
+MC-0023,My Company,15-06-2024,,Backend - MC,Backend Engineer,Junior,Hiring,Hired as Junior (entry level)
+MC-0024,My Company,01-08-2023,31-03-2024,Frontend - MC,Frontend Engineer,Senior,Hiring,Joined as Senior; performance track to lead
+MC-0024,My Company,01-04-2024,,Frontend - MC,Frontend Engineer,Lead,Promotion,Promoted to Lead
+MC-0025,My Company,01-10-2023,30-04-2024,Frontend - MC,Frontend Engineer,Middle,Hiring,Joined as Middle; ramp-up period
+MC-0025,My Company,01-05-2024,,Frontend - MC,Frontend Engineer,Senior,Promotion,Promoted to Senior
+MC-0026,My Company,01-11-2023,31-05-2024,Frontend - MC,Frontend Engineer,Middle,Hiring,Joined as Middle; ramp-up period
+MC-0026,My Company,01-06-2024,,Frontend - MC,Frontend Engineer,Senior,Promotion,Promoted to Senior
+MC-0027,My Company,15-01-2024,,Frontend - MC,Frontend Engineer,Senior,Hiring,Hired directly as Senior
+MC-0028,My Company,01-02-2024,31-07-2024,Frontend - MC,Frontend Engineer,Junior,Hiring,Joined as Junior; probation + first projects
+MC-0028,My Company,01-08-2024,,Frontend - MC,Frontend Engineer,Middle,Promotion,Promoted to Middle
+MC-0029,My Company,15-02-2024,14-08-2024,Frontend - MC,Frontend Engineer,Junior,Hiring,Joined as Junior; probation + first projects
+MC-0029,My Company,15-08-2024,,Frontend - MC,Frontend Engineer,Middle,Promotion,Promoted to Middle
+MC-0030,My Company,01-03-2024,31-08-2024,Frontend - MC,Frontend Engineer,Junior,Hiring,Joined as Junior; probation + first projects
+MC-0030,My Company,01-09-2024,,Frontend - MC,Frontend Engineer,Middle,Promotion,Promoted to Middle
+MC-0031,My Company,15-03-2024,14-09-2024,Frontend - MC,Frontend Engineer,Junior,Hiring,Joined as Junior; probation + first projects
+MC-0031,My Company,15-09-2024,,Frontend - MC,Frontend Engineer,Middle,Promotion,Promoted to Middle
+MC-0032,My Company,01-05-2024,,Frontend - MC,Frontend Engineer,Junior,Hiring,Hired as Junior (entry level)
+MC-0033,My Company,15-05-2024,,Frontend - MC,Frontend Engineer,Junior,Hiring,Hired as Junior (entry level)
+MC-0034,My Company,01-09-2023,31-03-2024,iOS - MC,iOS Engineer,Middle,Hiring,Joined as Middle; ramp-up period
+MC-0034,My Company,01-04-2024,,iOS - MC,iOS Engineer,Senior,Promotion,Promoted to Senior
+MC-0035,My Company,15-10-2023,14-05-2024,iOS - MC,iOS Engineer,Middle,Hiring,Joined as Middle; ramp-up period
+MC-0035,My Company,15-05-2024,,iOS - MC,iOS Engineer,Senior,Promotion,Promoted to Senior
+MC-0036,My Company,10-01-2024,09-07-2024,iOS - MC,iOS Engineer,Junior,Hiring,Joined as Junior; probation + first projects
+MC-0036,My Company,10-07-2024,,iOS - MC,iOS Engineer,Middle,Promotion,Promoted to Middle
+MC-0037,My Company,10-02-2024,09-08-2024,iOS - MC,iOS Engineer,Junior,Hiring,Joined as Junior; probation + first projects
+MC-0037,My Company,10-08-2024,,iOS - MC,iOS Engineer,Middle,Promotion,Promoted to Middle
+MC-0038,My Company,01-03-2024,31-08-2024,iOS - MC,iOS Engineer,Junior,Hiring,Joined as Junior; probation + first projects
+MC-0038,My Company,01-09-2024,,iOS - MC,iOS Engineer,Middle,Promotion,Promoted to Middle
+MC-0039,My Company,01-06-2024,,iOS - MC,iOS Engineer,Junior,Hiring,Hired as Junior (entry level)
+MC-0040,My Company,15-08-2023,14-04-2024,DevOps - MC,DevOps / SRE Engineer,Senior,Hiring,Joined as Senior; performance track to lead
+MC-0040,My Company,15-04-2024,,DevOps - MC,DevOps / SRE Engineer,Lead,Promotion,Promoted to Lead
+MC-0041,My Company,01-11-2023,31-05-2024,DevOps - MC,DevOps / SRE Engineer,Middle,Hiring,Joined as Middle; ramp-up period
+MC-0041,My Company,01-06-2024,,DevOps - MC,DevOps / SRE Engineer,Senior,Promotion,Promoted to Senior
+MC-0042,My Company,01-02-2024,31-07-2024,DevOps - MC,DevOps / SRE Engineer,Junior,Hiring,Joined as Junior; probation + first projects
+MC-0042,My Company,01-08-2024,,DevOps - MC,DevOps / SRE Engineer,Middle,Promotion,Promoted to Middle
+MC-0043,My Company,01-03-2024,31-08-2024,DevOps - MC,DevOps / SRE Engineer,Junior,Hiring,Joined as Junior; probation + first projects
+MC-0043,My Company,01-09-2024,,DevOps - MC,DevOps / SRE Engineer,Middle,Promotion,Promoted to Middle
+MC-0044,My Company,15-06-2024,,DevOps - MC,DevOps / SRE Engineer,Junior,Hiring,Hired as Junior (entry level)
+MC-0045,My Company,15-09-2023,14-05-2024,Security - MC,Security Engineer,Senior,Hiring,Joined as Senior; performance track to lead
+MC-0045,My Company,15-05-2024,,Security - MC,Security Engineer,Lead,Promotion,Promoted to Lead
+MC-0046,My Company,01-10-2023,31-05-2024,QA - MC,QA Engineer,Senior,Hiring,Joined as Senior; performance track to lead
+MC-0046,My Company,01-06-2024,,QA - MC,QA Engineer,Lead,Promotion,Promoted to Lead
+MC-0047,My Company,01-11-2023,31-05-2024,QA - MC,QA Engineer,Middle,Hiring,Joined as Middle; ramp-up period
+MC-0047,My Company,01-06-2024,,QA - MC,QA Engineer,Senior,Promotion,Promoted to Senior
+MC-0048,My Company,15-01-2024,14-07-2024,QA - MC,QA Engineer,Junior,Hiring,Joined as Junior; probation + first projects
+MC-0048,My Company,15-07-2024,,QA - MC,QA Engineer,Middle,Promotion,Promoted to Middle
+MC-0049,My Company,01-02-2024,31-07-2024,QA - MC,QA Engineer,Junior,Hiring,Joined as Junior; probation + first projects
+MC-0049,My Company,01-08-2024,,QA - MC,QA Engineer,Middle,Promotion,Promoted to Middle
+MC-0050,My Company,01-05-2024,,QA - MC,QA Engineer,Junior,Hiring,Hired as Junior (entry level)
+MC-0051,My Company,01-12-2023,30-06-2024,QA - MC,QA Automation Engineer,Middle,Hiring,Joined as Middle; ramp-up period
+MC-0051,My Company,01-07-2024,,QA - MC,QA Automation Engineer,Senior,Promotion,Promoted to Senior
+MC-0052,My Company,15-02-2024,14-08-2024,QA - MC,QA Automation Engineer,Junior,Hiring,Joined as Junior; probation + first projects
+MC-0052,My Company,15-08-2024,,QA - MC,QA Automation Engineer,Middle,Promotion,Promoted to Middle
+MC-0053,My Company,01-03-2024,31-08-2024,QA - MC,QA Automation Engineer,Junior,Hiring,Joined as Junior; probation + first projects
+MC-0053,My Company,01-09-2024,,QA - MC,QA Automation Engineer,Middle,Promotion,Promoted to Middle
+MC-0054,My Company,20-03-2024,19-09-2024,QA - MC,Release Engineer,Junior,Hiring,Joined as Junior; probation + first projects
+MC-0054,My Company,20-09-2024,,QA - MC,Release Engineer,Middle,Promotion,Promoted to Middle
+MC-0055,My Company,01-08-2023,29-02-2024,Product - MC,Product Manager,Middle,Hiring,Joined as Middle; ramp-up period
+MC-0055,My Company,01-03-2024,,Product - MC,Product Manager,Senior,Promotion,Promoted to Senior
+MC-0056,My Company,01-10-2023,30-04-2024,Product - MC,Product Manager,Middle,Hiring,Joined as Middle; ramp-up period
+MC-0056,My Company,01-05-2024,,Product - MC,Product Manager,Senior,Promotion,Promoted to Senior
+MC-0057,My Company,01-11-2023,31-05-2024,Product - MC,Product Manager,Middle,Hiring,Joined as Middle; ramp-up period
+MC-0057,My Company,01-06-2024,,Product - MC,Product Manager,Senior,Promotion,Promoted to Senior
+MC-0058,My Company,01-02-2024,,Product - MC,UX Researcher,Middle,Hiring,Hired as Middle
+MC-0059,My Company,01-12-2023,30-06-2024,Product - MC,Product Designer,Middle,Hiring,Joined as Middle; ramp-up period
+MC-0059,My Company,01-07-2024,,Product - MC,Product Designer,Senior,Promotion,Promoted to Senior
+MC-0060,My Company,15-02-2024,,Product - MC,Product Designer,Middle,Hiring,Hired as Middle
+MC-0061,My Company,10-03-2024,,Product - MC,Content Designer,Middle,Hiring,Hired as Middle
+MC-0062,My Company,15-03-2024,,Product - MC,Technical Writer,Middle,Hiring,Hired as Middle
+MC-0063,My Company,10-01-2024,09-07-2024,Data - MC,Data Scientist,Junior,Hiring,Joined as Junior; probation + first projects
+MC-0063,My Company,10-07-2024,,Data - MC,Data Scientist,Middle,Promotion,Promoted to Middle
+MC-0064,My Company,15-11-2023,14-06-2024,Data - MC,Data Analyst,Middle,Hiring,Joined as Middle; ramp-up period
+MC-0064,My Company,15-06-2024,,Data - MC,Data Analyst,Senior,Promotion,Promoted to Senior
+MC-0065,My Company,15-10-2023,14-05-2024,Data - MC,Data Engineer,Middle,Hiring,Joined as Middle; ramp-up period
+MC-0065,My Company,15-05-2024,,Data - MC,Data Engineer,Senior,Promotion,Promoted to Senior
+MC-0066,My Company,01-02-2024,31-07-2024,Data - MC,Data Engineer,Junior,Hiring,Joined as Junior; probation + first projects
+MC-0066,My Company,01-08-2024,,Data - MC,Data Engineer,Middle,Promotion,Promoted to Middle
+MC-0067,My Company,15-02-2024,14-08-2024,Data - MC,ML Engineer,Junior,Hiring,Joined as Junior; probation + first projects
+MC-0067,My Company,15-08-2024,,Data - MC,ML Engineer,Middle,Promotion,Promoted to Middle
+MC-0068,My Company,20-01-2024,,Data - MC,MLOps Engineer,Senior,Hiring,Hired directly as Senior
+MC-0069,My Company,01-09-2023,31-05-2024,Sales - MC,Account Executive,Senior,Hiring,Joined company; initial position before head role
+MC-0069,My Company,01-06-2024,,Sales - MC,Head of Sales,Head,Promotion,Promoted to head role
+MC-0070,My Company,15-01-2024,,Sales - MC,Account Executive,Senior,Hiring,Hired directly as Senior
+MC-0071,My Company,01-03-2024,,Sales - MC,Sales Development Representative,Middle,Hiring,Hired as Middle
+MC-0072,My Company,01-02-2024,,Sales - MC,Partnerships Manager,Senior,Hiring,Hired directly as Senior
+MC-0073,My Company,10-01-2024,09-07-2024,Support - MC,Support Lead,Junior,Hiring,Joined as Junior; probation + first projects
+MC-0073,My Company,10-07-2024,,Support - MC,Support Lead,Middle,Promotion,Promoted to Middle
+MC-0074,My Company,01-05-2024,,Support - MC,Support Specialist,Junior,Hiring,Hired as Junior (entry level)
+MC-0075,My Company,15-05-2024,,Support - MC,Support Specialist,Junior,Hiring,Hired as Junior (entry level)
+MC-0076,My Company,01-06-2024,,Support - MC,Support Specialist,Junior,Hiring,Hired as Junior (entry level)
+MC-0077,My Company,01-02-2024,,Finance - MC,Accountant,Middle,Hiring,Hired as Middle
+MC-0078,My Company,20-01-2024,,Legal - MC,Legal Counsel,Senior,Hiring,Hired directly as Senior
+MC-0079,My Company,10-02-2024,,Office & IT - MC,Office Manager,Middle,Hiring,Hired as Middle
+MC-0080,My Company,01-03-2024,,Office & IT - MC,IT Administrator,Middle,Hiring,Hired as Middle

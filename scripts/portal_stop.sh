@@ -2,5 +2,5 @@
 set -euo pipefail
 source "$(dirname "${BASH_SOURCE[0]}")/_portal_compose.sh"
 
-dc down --remove-orphans
+dc stop
 dc ps || true
