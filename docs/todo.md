@@ -116,114 +116,23 @@
 ---
 
 ## 5) Кастомизация портала под COMPASS-HR (DocTypes + UI + права)
-> На этом этапе создаются сущности, в которые ML-сервис будет писать результаты.
 
-> ⚠️ Для реализации модом надо в этом пункте сделать:
-> - отказ от “ручного кликанья” DocTypes в UI как основного способа; DocTypes должны создаваться из кода Frappe app
-> - весь UI (страницы, кнопки, workspace) — в своём приложении (Frappe app), чтобы установка была одной командой install-app
-> - все сущности модуля должны быть изолированы (свои DocTypes/права), чтобы не ломать и не менять стандартные HRMS/ERPNext данные
-
-### 5.1. Создание собственного приложения (custom app) внутри Frappe
-- [ ] Создать папку для кастомного приложения в репозитории:
-  <details>
-    <summary>Команды</summary>
-
-    cd /Users/andrey/Documents/projects/Compass-HR-AI-Module
-    mkdir -p portal/custom_app
-
-  </details>
-- [ ] Принцип: custom app должен храниться в репозитории и устанавливаться в контейнер (подход зависит от dev-режима Frappe; в дальнейшем выбрать один способ):
-  - вариант A: монтирование каталога app внутрь контейнера (удобно для разработки),
-  - вариант B: разработка через Dev Containers/внутри контейнера и commit в repo.
-
-> TODO: после того как портал стабильно запустится, выбрать конкретный способ разработки кастомного app (с монтированием кода наружу).
-
-> ⚠️ Для реализации модом надо в этом пункте сделать:
-> - создать реальный Frappe app (например `compass_hr_ai`) и держать его исходники в репозитории
-> - монтировать этот app в контейнер (bind mount), как уже сделано для hrms, чтобы код был “снаружи”
-> - обеспечить установку/обновление: bench --site <site> install-app compass_hr_ai (и migrate)
-> - запретить изменения стандартных DocTypes; только добавлять свои DocTypes и read-only интеграцию (кнопки/вьюхи) в Employee
-
-### 5.2. Создание DocTypes (минимальный боевой набор)
-- [ ] Создать DocTypes (через UI Frappe или через код app):
-  - [ ] `Skill`
-  - [ ] `RoleProfile`
-  - [ ] `EmployeeSkillProfile`
-  - [ ] `CareerPrediction`
-  - [ ] `CourseCatalog`
-  - [ ] `LearningRecommendation`
-  - [ ] `TeamPlan`
-  - [ ] `Resume` (attachments + метаданные)
-  - [ ] \CompassEmploymentHistory` (история ролей/переводов внутри компании)`
-
-
-- [ ] Сразу определить поля и связи:
-  - [ ] `Skill`: name, category, aliases, source, embedding_id
-  - [ ] `RoleProfile`: role_name, level, required_skills(child table: skill, weight, min_level), source
-  - [ ] `EmployeeSkillProfile`: employee(link), skills(child: skill, level, evidence, updated_at)
-  - [ ] `CareerPrediction`: employee, current_role, predictions(child: target_role, probability, explanation_json, timestamp)
-  - [ ] `CourseCatalog`: provider, course_id, title, description, url, skills(child), embedding_id
-  - [ ] `LearningRecommendation`: employee, target_role, gap(child: skill, delta), courses(child: course_id, score, why_json, link)
-  - [ ] `TeamPlan`: department_name, target_roles(child: role_profile, count, priority, deadline), results (internal/upskill/external + ссылки на рекомендации)
-  - [ ] `Resume`: employee, file, extracted_text, extracted_skills(child), parsed_at
-  - [ ] \CompassEmploymentHistory`: employee, company, from_date, to_date, department, designation, grade, change_type, comment`
-
-> ⚠️ Для реализации модом надо в этом пункте сделать:  
-> -	завести отдельный DocType CompassEmploymentHistory (история ролей внутри компании), чтобы не использовать стандартные HRMS Promotion/Transfer как хранилище  
-> -	хранить карьерный путь как набор “шагов” (from/to + dept + designation + grade), где текущая позиция — это запись с пустым to_date  
-> -	подготовить demo seed seed/07_compass_employment_history.csv и импортировать его после установки кастомного app и миграций DocTypes (чтобы не переносить данные потом)
-
-> ⚠️ Для реализации модом надо в этом пункте сделать:
-> - все DocTypes должны создаваться в коде Frappe app (через fixtures/migrations), а не только в UI
-
-> ⚠️ Важно про способ хранения/доставки схемы:
-> - DocTypes/Pages/Workspace должны жить в репозитории приложения (как часть Frappe app)
-> - изменения схемы проводить через `bench migrate` + patches (и версии приложения)
-> - fixtures использовать только для “UI-настроек” (Custom Field / Property Setter / Workspace и т.п.), а не как основной механизм эволюции DocTypes
-
-> - имена/нейминг: либо префикс “Compass” в UI-именах, либо аккуратные internal names, чтобы не конфликтовать с ERPNext/HRMS
-> - любые записи/изменения должны идти только в эти DocTypes; HRMS/ERPNext сущности не мутировать
-> - предусмотреть версии схемы: миграции/patches при обновлении модуля
-> - предусмотреть “удаляемость”: если модуль удалить, основные данные HRMS должны остаться без изменений
-
-> ⚠️ Для реализации “изоляции и вакуума” надо в этом пункте сделать:
-> - в модуле работать с “снимками” данных сотрудников (read-only копии) в своих DocTypes, чтобы не менять реальные карточки
-> - обновление снимков по расписанию (например nightly) и по кнопке “Refresh”
-> - явно разделить: “источник” (HRMS Employee и связанные сущности) и “снимок для ML” (свои DocTypes)
-> - хранить результаты ML отдельно (в CareerPrediction/LearningRecommendation/TeamPlan), не писать обратно в HRMS поля
-
-> ⚠️ Если хочется проще (без “снимков”) — допускается режим “read-only”:
-> - модуль читает HRMS Employee и связанные сущности ТОЛЬКО на чтение (без копирования)
-> - результаты ML всё равно пишет только в DocTypes модуля
-> - “снимки” включать позже, когда понадобится воспроизводимость/аудит/обезличивание/ускорение пересчётов
-
-
-### 5.3. Роли и права доступа
-- [ ] Настроить роли:
-  - [ ] HR Admin — полный доступ
-  - [ ] Manager — доступ к TeamPlan и сотрудникам своего отдела
-  - [ ] Employee — доступ к собственным рекомендациям (read-only)
-- [ ] Проверить, что Employee не видит чужие рекомендации.
-
-> ⚠️ Для реализации модом надо в этом пункте сделать:
-> - создать отдельные роли модуля (например `Compass HR Admin`, `Compass Manager`, `Compass Employee`)
-> - права на DocTypes модуля: строгие (Employee видит только свои рекомендации, Manager — только свой департамент/подчинённых)
-> - не выдавать новые права на стандартные HRMS DocTypes; модуль не должен расширять доступ к HR данным
-
-### 5.4. UI-элементы (кнопки и формы)
-- [ ] В карточке сотрудника добавить кнопки:
-  - [ ] **Generate Career Plan**
-  - [ ] **Refresh Skills from Resume**
-- [ ] В форме TeamPlan добавить кнопку:
-  - [ ] **Compute Team Plan**
-
-> На этом этапе кнопки пока могут вызывать “заглушки” (или логировать событие), но интерфейс должен быть готов.
-
-> ⚠️ Для реализации модом надо в этом пункте сделать:
-> - UI реализовать в своём Frappe app: workspace/страницы/doctype views, а не через “ручные” правки
-> - кнопки должны вызывать whitelisted server methods (из app), а те уже дергают ML-service
-> - добавить отдельный раздел/меню “COMPASS-HR” (workspace), чтобы модуль был “как отдельная вкладка”
-> - добавить режим “demo”: кнопки работают даже без реальных данных (на синтетике/seed), но этот seed — опционален
+- [x] Создано Frappe приложение `compass_hr_ai` и добавлено в репозиторий (`portal/custom_app/compass_hr_ai`)
+- [x] Подключён bind mount приложения в Docker (`pwd.yml`) для сервисов backend/configurator/queue-long/queue-short/scheduler
+- [x] Приложение установлено на сайт (`bench --site frontend install-app compass_hr_ai`) + выполнены миграции
+- [x] Включён `developer_mode` (чтобы изменения сохранялись в код приложения)
+- [x] Создан Workspace **COMPASS-HR** (отдельная вкладка модуля слева)
+- [x] Создан DocType **Compass Employment History** (история ролей/переводов внутри компании)
+- [x] Созданы DocTypes модуля (все основные + child tables):  
+      Compass Skill, Compass Role Profile, Compass Employee Skill Profile, Compass Career Prediction, Compass Course,  
+      Compass Learning Recommendation, Compass Team Plan, Compass Resume + все необходимые child table DocTypes
+- [x] Настроены роли модуля: `Compass HR Admin`, `Compass Manager`, `Compass Employee`
+- [x] Настроены базовые permissions для DocTypes модуля (admin полный доступ, manager ограниченный, employee — минимальный/по owner где применимо)
+- [x] Добавлены UI-кнопки-заглушки в Employee: **Generate Career Plan**, **Refresh Skills from Resume**
+- [x] Добавлена UI-кнопка-заглушка в **Compass Team Plan**: **Compute Team Plan**
+- [x] Workspace **COMPASS-HR** наполнен секциями/shortcuts на ключевые DocTypes (вкладка больше не пустая)
+- [x] Зафиксированы fixtures (Roles + Workspace) и экспортированы в репозиторий (`bench export-fixtures`)
+- [x] Подготовлен и проверен импорт демо-seed `seed/07_compass_employment_history.csv` для **Compass Employment History**
 
 ---
 
@@ -758,6 +667,19 @@
 > ⚠️ Для реализации “изоляции и вакуума” надо в этом пункте сделать:
 > - server methods должны брать входные данные из снимков (read-only копий) и/или из HRMS только на чтение
 > - любые “обновления” должны быть обновлениями снимков и результатов модуля, а не изменениями HRMS карточек
+
+### 15.2.1. Строгие правила видимости (обязательно)
+- [ ] Реализовать row-level access:
+  - [ ] Compass Employee видит только записи, где employee == текущий пользователь (CareerPrediction / LearningRecommendation / Resume / EmployeeSkillProfile)
+  - [ ] Compass Manager видит только сотрудников своего отдела / подчинённых (TeamPlan + рекомендации по своим сотрудникам)
+  - [ ] Compass HR Admin видит всё
+- [ ] Реализация не через “галочки”, а через:
+  - [ ] permission_query_conditions (Python)
+  - [ ] и/или проверки в whitelisted methods + server-side validate
+- [ ] Документы должны иметь явную привязку к Employee (поле employee) и правильный owner/created_by (если нужно)
+- [ ] Добавить mapping User -> Employee (как определяем “чей employee”)
+  - [ ] использовать стандартное поле в Employee (User ID) или сделать своё связующее поле/таблицу
+  - [ ] (то есть этот пункт для того чтобы конкретный пользователь видел только своё)
 
 ### 15.3. Фоновые задачи (scheduler)
 - [ ] Добавить jobs:

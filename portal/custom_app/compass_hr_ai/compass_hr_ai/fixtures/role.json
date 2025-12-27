@@ -1,0 +1,41 @@
+[
+ {
+  "desk_access": 1,
+  "disabled": 0,
+  "docstatus": 0,
+  "doctype": "Role",
+  "home_page": null,
+  "is_custom": 0,
+  "modified": "2025-12-26 18:05:02.630539",
+  "name": "Compass HR Admin",
+  "restrict_to_domain": null,
+  "role_name": "Compass HR Admin",
+  "two_factor_auth": 0
+ },
+ {
+  "desk_access": 1,
+  "disabled": 0,
+  "docstatus": 0,
+  "doctype": "Role",
+  "home_page": null,
+  "is_custom": 0,
+  "modified": "2025-12-26 18:05:51.347946",
+  "name": "Compass Manager",
+  "restrict_to_domain": null,
+  "role_name": "Compass Manager",
+  "two_factor_auth": 0
+ },
+ {
+  "desk_access": 1,
+  "disabled": 0,
+  "docstatus": 0,
+  "doctype": "Role",
+  "home_page": null,
+  "is_custom": 0,
+  "modified": "2025-12-26 18:06:11.911336",
+  "name": "Compass Employee",
+  "restrict_to_domain": null,
+  "role_name": "Compass Employee",
+  "two_factor_auth": 0
+ }
+]

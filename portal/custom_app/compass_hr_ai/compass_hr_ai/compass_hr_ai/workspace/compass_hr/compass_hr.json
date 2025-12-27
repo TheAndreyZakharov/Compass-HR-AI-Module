@@ -1,0 +1,183 @@
+{
+ "charts": [],
+ "content": "[{\"id\":\"Ob1MUNvkGe\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Team Plans\",\"col\":3}},{\"id\":\"pYFHFpC4tO\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Learning Recommendations\",\"col\":3}},{\"id\":\"iZG-oT_K98\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Career Predictions\",\"col\":3}},{\"id\":\"nnDjMC19Cn\",\"type\":\"spacer\",\"data\":{\"col\":12}},{\"id\":\"rPnYZ8Jand\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Employment History\",\"col\":3}},{\"id\":\"RHwd9zAX0u\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Skill Profiles\",\"col\":3}},{\"id\":\"sy_J4hiQO5\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Resumes\",\"col\":3}},{\"id\":\"zjV_FcLjgu\",\"type\":\"spacer\",\"data\":{\"col\":12}},{\"id\":\"XJ1wtT1Qby\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Skills\",\"col\":3}},{\"id\":\"DRrNecMpHk\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Role Profiles\",\"col\":3}},{\"id\":\"zK5_AnQw-T\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Courses\",\"col\":3}}]",
+ "creation": "2025-12-27 04:33:53.948757",
+ "custom_blocks": [],
+ "docstatus": 0,
+ "doctype": "Workspace",
+ "hide_custom": 0,
+ "icon": "color-review-points",
+ "idx": 0,
+ "is_hidden": 0,
+ "label": "COMPASS-HR",
+ "links": [
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Team Plans",
+   "link_count": 0,
+   "link_to": "Compass Team Plan",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Learning Recommendations",
+   "link_count": 0,
+   "link_to": "Compass Learning Recommendation",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Career Predictions",
+   "link_count": 0,
+   "link_to": "Compass Career Prediction",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Employment History",
+   "link_count": 0,
+   "link_to": "Compass Employment History",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Skill Profiles",
+   "link_count": 0,
+   "link_to": "Compass Employee Skill Profile",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Resumes",
+   "link_count": 0,
+   "link_to": "Compass Resume",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Skills",
+   "link_count": 0,
+   "link_to": "Compass Skill",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Role Profiles",
+   "link_count": 0,
+   "link_to": "Compass Role Profile",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Courses",
+   "link_count": 0,
+   "link_to": "Compass Course",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  }
+ ],
+ "modified": "2025-12-27 04:35:10.927253",
+ "modified_by": "Administrator",
+ "module": "Compass HR AI",
+ "name": "COMPASS-HR",
+ "number_cards": [],
+ "owner": "Administrator",
+ "parent_page": "",
+ "public": 1,
+ "quick_lists": [],
+ "roles": [
+  {
+   "role": "System Manager"
+  },
+  {
+   "role": "Compass HR Admin"
+  },
+  {
+   "role": "Compass Manager"
+  }
+ ],
+ "sequence_id": 33.0,
+ "shortcuts": [
+  {
+   "doc_view": "List",
+   "label": "Team Plans",
+   "link_to": "Compass Team Plan",
+   "type": "DocType"
+  },
+  {
+   "doc_view": "List",
+   "label": "Learning Recommendations",
+   "link_to": "Compass Learning Recommendation",
+   "type": "DocType"
+  },
+  {
+   "doc_view": "List",
+   "label": "Career Predictions",
+   "link_to": "Compass Career Prediction",
+   "type": "DocType"
+  },
+  {
+   "doc_view": "List",
+   "label": "Employment History",
+   "link_to": "Compass Employment History",
+   "type": "DocType"
+  },
+  {
+   "doc_view": "List",
+   "label": "Skill Profiles",
+   "link_to": "Compass Employee Skill Profile",
+   "type": "DocType"
+  },
+  {
+   "doc_view": "List",
+   "label": "Resumes",
+   "link_to": "Compass Resume",
+   "type": "DocType"
+  },
+  {
+   "doc_view": "List",
+   "label": "Skills",
+   "link_to": "Compass Skill",
+   "type": "DocType"
+  },
+  {
+   "doc_view": "List",
+   "label": "Role Profiles",
+   "link_to": "Compass Role Profile",
+   "type": "DocType"
+  },
+  {
+   "doc_view": "List",
+   "label": "Courses",
+   "link_to": "Compass Course",
+   "type": "DocType"
+  }
+ ],
+ "title": "COMPASS-HR"
+}
