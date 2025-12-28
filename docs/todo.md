@@ -138,80 +138,17 @@
 
 ## 6) ML-часть: структура папок и единое окружение Python (поэтапно)
 
-> ⚠️ Для реализации модом надо в этом пункте сделать:
-> - ML должен быть упакован как сервис (FastAPI) с предсказуемым запуском (docker compose или python run)
-> - веса/индексы/эмбеддинги не хранить в git; доставлять через “model pack” (архив) или release assets
-> - предусмотреть два режима: demo (маленькие артефакты) и full (большие артефакты)
-
-### 6.1. Создание папки `ml/` и виртуального окружения
-- [ ] Создать папку ML:
-  <details>
-    <summary>Команды</summary>
-
-    cd /Users/andrey/Documents/projects/Compass-HR-AI-Module
-    mkdir -p ml
-
-  </details>
-- [ ] Создать единственное окружение для проекта:
-  <details>
-    <summary>Команды</summary>
-
-    cd ml
-    python3 -m venv .venv
-    source .venv/bin/activate
-    python -V
-    pip -V
-
-  </details>
-- [ ] Обновить pip/setuptools/wheel:
-  <details>
-    <summary>Команды</summary>
-
-    pip install -U pip setuptools wheel
-
-  </details>
-
-### 6.2. Базовые зависимости (фиксировать постепенно)
-- [ ] Создать `ml/requirements.txt` (первый набор — ETL + ноутбуки + базовые утилиты):
-  <details>
-    <summary>Команды</summary>
-
-    cat > requirements.txt << 'EOF'
-    numpy
-    pandas
-    pyarrow
-    scikit-learn
-    tqdm
-    matplotlib
-
-    jupyter
-    ipykernel
-
-    requests
-    httpx
-    python-dotenv
-    pydantic
-
-    ruff
-    black
-    mypy
-    pytest
-    pre-commit
-    EOF
-
-  </details>
-- [ ] Установить:
-  <details>
-    <summary>Команды</summary>
-
-    pip install -r requirements.txt
-    python -m ipykernel install --user --name compass-hr --display-name "Python (compass-hr)"
-
-  </details>
-
-### 6.3. Настройка VS Code под окружение
-- [ ] В VS Code выбрать интерпретатор: `ml/.venv/bin/python`
-- [ ] В ноутбуках выбрать kernel: **Python (compass-hr)**
+- [x] Создана папка `ml/` в репозитории
+- [x] Создано и используется единое виртуальное окружение `ml/.venv` (Python 3.11.x)
+- [x] Обновлены базовые инструменты окружения (`pip`, `setuptools`, `wheel`)
+- [x] Создан и зафиксирован `ml/requirements.txt` (базовый набор зависимостей для ETL/ноутбуков/утилит)
+- [x] Установлены зависимости из `ml/requirements.txt`
+- [x] Зарегистрирован Jupyter kernel `compass-hr` (display name: **Python (compass-hr)**)
+- [x] Создан минимальный каркас ML-проекта (`ml/src/compass_hr_ai/__init__.py`, `ml/notebooks/`)
+- [x] Добавлен `ml/pyproject.toml` (единые настройки ruff/black/mypy)
+- [x] Добавлен smoke-test модуль и проверен запуск (`python -m compass_hr_ai.smoke`)
+- [x] VS Code настроен на интерпретатор `ml/.venv/bin/python` и kernel **Python (compass-hr)**
+- [x] `ml/.venv` исключён из git (не попадает в коммиты)
 
 ---
 
@@ -573,6 +510,13 @@
 > - фиксировать контракт API (версии) и валидировать схемы вход/выход (pydantic)
 > - добавить конфиг “где лежат модели” и “где лежат индексы” (через env)
 > - добавить скрипт скачивания model pack (если модели не в репо)
+
+
+> ⚠️ Для реализации модом надо в этом пункте сделать:
+> - ML должен быть упакован как сервис (FastAPI) с предсказуемым запуском (docker compose или python run)
+> - веса/индексы/эмбеддинги не хранить в git; доставлять через “model pack” (архив) или release assets
+> - предусмотреть два режима: demo (маленькие артефакты) и full (большие артефакты)
+
 
 ### 14.1. Создать папку сервиса и файлы
 - [ ] Создать:

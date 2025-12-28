@@ -1,0 +1,29 @@
+{
+  "python.defaultInterpreterPath": "/Users/andrey/Documents/projects/Compass-HR-AI-Module/ml/.venv/bin/python",
+  "python.terminal.activateEnvironment": true,
+
+  "python.analysis.extraPaths": [
+    "/Users/andrey/Documents/projects/Compass-HR-AI-Module/ml/src"
+  ],
+  "python.analysis.autoSearchPaths": true,
+  "python.analysis.indexing": true,
+  "python.analysis.diagnosticMode": "workspace",
+
+  "python.analysis.exclude": [
+    "**/portal/**",
+    "**/portal/custom_app/**",
+    "**/portal/**/compass_hr_ai/**",
+    "**/.git/**",
+    "**/node_modules/**",
+    "**/__pycache__/**",
+    "**/.venv/**"
+  ],
+
+  "files.watcherExclude": {
+    "**/portal/**": true,
+    "**/.git/**": true,
+    "**/node_modules/**": true,
+    "**/__pycache__/**": true,
+    "**/.venv/**": true
+  }
+}

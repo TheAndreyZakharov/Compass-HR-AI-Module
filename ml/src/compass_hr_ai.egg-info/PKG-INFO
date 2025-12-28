@@ -1,0 +1,5 @@
+Metadata-Version: 2.4
+Name: compass-hr-ai
+Version: 0.0.0
+Summary: ML part for Compass HR AI Module
+Requires-Python: >=3.11
