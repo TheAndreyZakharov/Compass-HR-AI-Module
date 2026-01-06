@@ -154,70 +154,16 @@
 
 ## 7) Данные: структура и скачивание источников (по мере надобности)
 
-> ⚠️ Для реализации модом надо в этом пункте сделать:
-> - данные пользователя не тащить в репозиторий; модуль должен работать на их данных (через чтение HRMS)
-> - демо-данные держать отдельно и опционально (seed), чтобы “просто потыкаться” было легко
-> - кэш внешних API (hh/stepik) хранить локально (disk/volume), никогда не коммитить
-
-### 7.1. Создание структуры `data/` (только когда реально начинается работа с данными)
-- [ ] Создать (в корне репозитория):
-  <details>
-    <summary>Команды</summary>
-
-    cd /Users/andrey/Documents/projects/Compass-HR-AI-Module
-    mkdir -p data/raw data/interim data/processed data/cache
-
-  </details>
-- [ ] Добавить `data/` в `.gitignore` уже сделано (не коммитить большие данные).
-
-### 7.2. Карьерные траектории РФ (Zenodo)
-- [ ] Скачать датасет вручную (из браузера) и положить в `data/raw/rostrud/`:
-  <details>
-    <summary>Команды</summary>
-
-    mkdir -p data/raw/rostrud
-
-  </details>
-  - Страница набора: https://zenodo.org/records/12727876
-  - Скачать нужные архивы (например workexp / edu / codebook) и поместить туда.
-
-- [ ] Распаковать (пример):
-  <details>
-    <summary>Команды</summary>
-
-    cd data/raw/rostrud
-    # пример: unzip dataset1.workexp.csv.zip
-    unzip -n "*.zip"
-
-  </details>
-
-### 7.3. hh.ru API (вакансии/зарплаты)
-- [ ] Создать папку кэша:
-  <details>
-    <summary>Команды</summary>
-
-    mkdir -p data/cache/hh
-
-  </details>
-- [ ] Принцип: все ответы API сохраняются на диск, повторные запросы — только при явной команде “refresh”.
-
-### 7.4. Stepik API (курсы)
-- [ ] Создать папку кэша:
-  <details>
-    <summary>Команды</summary>
-
-    mkdir -p data/cache/stepik
-
-  </details>
-
-
-кратко про пункт:
-Создаём папки data/ и начинаем качать/складывать датасеты и кэши:
-	•	Zenodo (карьерные траектории) — файлы в data/raw/...
-	•	hh.ru — не “качать всё”, а дергать API и кэшировать ответы в data/cache/hh
-	•	Stepik — аналогично, кэш в data/cache/stepik
-
-здесь начинается “качать датасеты” (Zenodo — точно; hh/stepik — через API по мере надобности).
+- [x] Создана структура `data/` в корне репозитория: `data/raw`, `data/interim`, `data/processed`, `data/cache`
+- [x] Создана папка `data/raw/rostrud` под Zenodo датасет карьерных траекторий РФ
+- [x] Скачаны и размещены в `data/raw/rostrud/` файлы Zenodo:
+  - [x] `dataset1.workexp.csv` (work experience)
+  - [x] `dataset1.edu.csv` (education)
+  - [x] `Codebook.pdf` (описание/кодбук)
+- [x] Подготовлены папки кэша для внешних API (без данных в git):
+  - [x] `data/cache/hh/{vacancies,employers,areas,misc}`
+  - [x] `data/cache/stepik/{courses,search,misc}`
+- [x] Подтверждено, что `data/` игнорируется git (`data/` присутствует в `.gitignore`, файлы данных отображаются как Ignored)
 
 
 ---
