@@ -170,57 +170,31 @@
 
 ## 8) ETL-пайплайны (скрипты) — создание папок и файлов строго по этапу
 
-> ⚠️ Для реализации модом надо в этом пункте сделать:
-> - ETL должен быть воспроизводимым (одна команда → один результат), чтобы можно было собрать демо-артефакты
-> - результаты ETL для демо не хранить в git; публиковать как “demo data pack” отдельно (архив/release) или генерировать локально
-> - предусмотреть режим “demo small”: маленький срез данных для быстрого старта у пользователей
-
-### 8.1. Создать каркас ETL
-- [ ] Создать папки:
-  <details>
-    <summary>Команды</summary>
-
-    cd /Users/andrey/Documents/projects/Compass-HR-AI-Module/ml
-    mkdir -p src/compass_hr_ai/{etl,schemas,utils} notebooks
-    touch src/compass_hr_ai/__init__.py
-
-  </details>
-
-### 8.2. ETL: карьерные траектории (role normalization + sequences)
-- [ ] Создать файл:
-  - `ml/src/compass_hr_ai/etl/rostrud_ingest.py`
-- [ ] Реализовать шаги:
-  - [ ] чтение `workexp.csv` и ключевых полей,
-  - [ ] нормализация названий должностей (lowercase, очистка, словарь синонимов),
-  - [ ] построение справочника ролей `role_id`,
-  - [ ] формирование последовательностей (кандидат → упорядоченный список ролей со временем),
-  - [ ] сохранение в `data/processed/trajectories.parquet`.
-
-### 8.3. ETL: hh (vacancies ingest + parsing)
-- [ ] Создать файлы:
-  - `ml/src/compass_hr_ai/etl/hh_fetch.py`
-  - `ml/src/compass_hr_ai/etl/hh_parse.py`
-- [ ] Реализовать:
-  - [ ] запрос вакансий по роли/региону/опыту,
-  - [ ] кэширование JSON в `data/cache/hh/`,
-  - [ ] парсинг зарплат (from/to/currency), признаков, текста требований,
-  - [ ] сохранение в `data/processed/hh_vacancies.parquet`.
-
-### 8.4. ETL: Stepik (course catalog ingest)
-- [ ] Создать файлы:
-  - `ml/src/compass_hr_ai/etl/stepik_fetch.py`
-  - `ml/src/compass_hr_ai/etl/stepik_parse.py`
-- [ ] Реализовать:
-  - [ ] сбор курсов по ключевым словам/тегам,
-  - [ ] кэширование JSON в `data/cache/stepik/`,
-  - [ ] сохранение `data/processed/courses.parquet`.
-
-
-кратко про пункт:
-Пишем скрипты, которые превращают сырьё в нормальные таблицы:
-	•	Zenodo → нормализованные роли + последовательности → data/processed/trajectories.parquet
-	•	hh → вакансии/зарплаты/требования → data/processed/hh_vacancies.parquet
-	•	Stepik → каталог курсов → data/processed/courses.parquet
+- [x] Создан каркас ETL в `ml/src/compass_hr_ai/`:
+  - [x] `etl/` (ETL-скрипты)
+  - [x] `schemas/` (схемы/контракты данных)
+  - [x] `utils/` (утилиты)
+  - [x] зафиксирована структура пакета (импортируемые модули `compass_hr_ai.*`)
+- [x] Реализован ETL для карьерных траекторий (Rostrud / Zenodo):
+  - [x] ingest `dataset1.workexp.csv` (sep `|`, ключевые поля: `id_candidate`, `job_title`, `date_from`, `date_to`, `company_name`)
+  - [x] режим `--demo-small` для быстрого воспроизводимого прогона
+  - [x] сформированы артефакты:
+    - [x] `data/interim/rostrud_workexp_clean.parquet` (clean/sanitized workexp, demo sample)
+    - [x] `data/processed/trajectories.parquet` (последовательности карьерных переходов)
+    - [x] `data/processed/roles.parquet` (справочник нормализованных ролей)
+  - [x] добавлена проверка схемы/инспекция входного CSV (`--inspect`)
+- [x] Реализован ETL для hh.ru (vacancies ingest + parsing) с локальным кэшированием:
+  - [x] `hh_fetch` получает вакансии по текстовому запросу/региону/страницам и сохраняет ответы в `data/cache/hh/`
+  - [x] `hh_parse` парсит кэшированные ответы и собирает единый датасет
+  - [x] сформирован артефакт `data/processed/hh_vacancies.parquet` (demo sample)
+  - [x] подтверждён cache-hit режим (повторный запуск не дергает сеть без необходимости)
+- [x] Реализован ETL для Stepik (course catalog ingest) с локальным кэшированием:
+  - [x] `stepik_fetch` делает поиск по ключевым словам и кэширует результаты/батчи в `data/cache/stepik/`
+  - [x] `stepik_parse` собирает датасет курсов из кэша
+  - [x] сформирован артефакт `data/processed/courses.parquet` (demo sample)
+- [x] Добавлен и пройден smoke-тест ETL, подтверждающий воспроизводимость пайплайна:
+  - [x] `python -m compass_hr_ai.etl.smoke_etl` проходит полностью (OK: ETL smoke passed)
+  - [x] проверено наличие выходных parquet-артефактов в `data/processed/` и успешная генерация demo-данных
 
 
 ---
