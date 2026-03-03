@@ -2,4 +2,4 @@
 
 Career & Organizational Mapping for Planning Advancement, Skills & Staffing
 
-> IN ACTIVE DEVELOPMENT
+> DEVELOPMENT PAUSED INDEFINITELY
